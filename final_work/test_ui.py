@@ -30,7 +30,7 @@ def test_search_movie(driver):
         search_input = driver.find_element(By.NAME, "kp_query")
         search_input.send_keys("Побег из Шоушенка")
         search_input.send_keys(Keys.RETURN)
-    with allure.step("Дождаться результатов поиска и проверить наличие фильма"):
+    with (allure.step("Дождаться результатов поиска и проверить наличие фильма")):
         results = driver.find_elements(By.CSS_SELECTOR, ".search_results .element")
         assert any("Побег из Шоушенка" in result.text for result in results), "Фильм не найден в результатах поиска"
 

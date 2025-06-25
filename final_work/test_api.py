@@ -5,15 +5,18 @@ import allure
 BASE_URL = "https://api.kinopoisk.dev/v1.4/movie/search"
 SEARCH_ENDPOINT = "/search"
 
+
 # Фикстура для актуального токена
 @pytest.fixture
 def valid_token():
     return "B4CQE8A-PF7MM8T-G1NAH9B-7CH3MTH"
 
+
 # Фикстура для неактуального или просроченного токена
 @pytest.fixture
 def invalid_token():
     return "invalid_or_expired_token"
+
 
 # Общая функция для выполнения поиска
 def search_movie(query, token=None):
@@ -24,16 +27,18 @@ def search_movie(query, token=None):
     response = requests.get(f"{BASE_URL}{SEARCH_ENDPOINT}", headers=headers, params=params)
     return response
 
+
 @allure.feature("Поиск фильмов")
 @allure.story("Поиск по названию фильма на кириллице")
 def test_search_by_cyrillic_title(valid_token):
     query = "Брат"
     response = search_movie(query, token=valid_token)
-    with allure.step("Проверка успешного ответа и наличия результатов"):
+    with ((((allure.step("Проверка успешного ответа и наличия результатов"))))):
         assert response.status_code == 200, f"Unexpected status code: {response.status_code}"
         data = response.json()
         assert 'results' in data, "В ответе отсутствует 'results'"
         assert any('Брат' in result['title'] for result in data['results']), "Фильм с названием 'Брат' не найден"
+
 
 @allure.feature("Поиск фильмов")
 @allure.story("Поиск по названию фильма на латинице")
@@ -46,6 +51,7 @@ def test_search_by_latin_title(valid_token):
         assert 'results' in data
         assert any('Inception' in result['title'] for result in data['results'])
 
+
 @allure.feature("Поиск фильмов")
 @allure.story("Поиск по названию фильма с цифрами")
 def test_search_with_numbers(valid_token):
@@ -57,6 +63,7 @@ def test_search_with_numbers(valid_token):
         assert 'results' in data
         # Можно проверить наличие хотя бы одного результата
         assert len(data['results']) > 0
+
 
 @allure.feature("Поиск фильмов")
 @allure.story("Поиск по произвольному набору символов")
@@ -71,6 +78,7 @@ def test_search_with_random_symbols(valid_token):
         else:
             assert response.status_code == 200 or response.status_code == 204
 
+
 @allure.feature("Поиск фильмов")
 @allure.story("Пустой поиск")
 def test_empty_search(valid_token):
@@ -83,6 +91,7 @@ def test_empty_search(valid_token):
             data = response.json()
             # Можно проверить, что возвращается список или сообщение об ошибке
             assert 'results' in data or 'error' in data
+
 
 @allure.feature("Поиск фильмов")
 @allure.story("Поиск без токена")
@@ -98,6 +107,7 @@ def test_search_without_token():
         else:
             data = response.json()
             assert 'results' in data
+
 
 @allure.feature("Поиск фильмов")
 @allure.story("Поиск с неактуальным токеном")
