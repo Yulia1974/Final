@@ -75,3 +75,4 @@ def test_open_reviews_tab(driver):
     with allure.step("Проверить наличие заголовка 'Отзывы' на странице"):
         header = driver.find_element(By.TAG_NAME, "h1")
         assert "Отзывы" in header.text
+
