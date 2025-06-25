@@ -113,3 +113,4 @@ def test_search_with_expired_token(invalid_token):
         assert response.status_code == 401 or response.status_code == 403
         data = response.json()
         assert 'error' in data or 'Unauthorized' in data.get('message', '')
+
