@@ -1,4 +1,4 @@
-MY_API_TOKEN = "B4CQE8A-PF7MM8T-G1NAH9B-7CH3MTH"
+MY_API_TOKEN = "твой_токен"
 INVALID_TOKEN = "invalid_or_expired_token"
 BASE_API_URL = "https://api.kinopoisk.dev/v1.4/movie"
 SEARCH_ENDPOINT = "/search"
