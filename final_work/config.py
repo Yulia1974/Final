@@ -1,0 +1,7 @@
+MY_API_TOKEN = "B4CQE8A-PF7MM8T-G1NAH9B-7CH3MTH"
+INVALID_TOKEN = "invalid_or_expired_token"
+BASE_API_URL = "https://api.kinopoisk.dev/v1.4/movie"
+SEARCH_ENDPOINT = "/search"
+UI_URL = "https://www.kinopoisk.ru/"
+DUNE_URL = "https://www.kinopoisk.ru/film/409424/"
+OHO_URL = "https://www.kinopoisk.ru/film/453397/"

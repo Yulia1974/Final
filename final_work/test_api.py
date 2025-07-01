@@ -1,21 +1,19 @@
 import pytest
 import requests
 import allure
-
-BASE_URL = "https://api.kinopoisk.dev/v1.4/movie"
-SEARCH_ENDPOINT = "/search"
+from config import BASE_API_URL, SEARCH_ENDPOINT, MY_API_TOKEN, INVALID_TOKEN
 
 
 # Фикстура для актуального токена
 @pytest.fixture
 def valid_token():
-    return "B4CQE8A-PF7MM8T-G1NAH9B-7CH3MTH"
+    return MY_API_TOKEN
 
 
 # Фикстура для неактуального или просроченного токена
 @pytest.fixture
 def invalid_token():
-    return "invalid_or_expired_token"
+    return INVALID_TOKEN
 
 
 # Общая функция для выполнения поиска
@@ -24,7 +22,7 @@ def search_movie(query, token=None):
     if token:
         headers['X-API-Key'] = token
     params = {'query': query}
-    response = requests.get(f"{BASE_URL}{SEARCH_ENDPOINT}",
+    response = requests.get(f"{BASE_API_URL}{SEARCH_ENDPOINT}",
                             headers=headers, params=params)
     return response
 
